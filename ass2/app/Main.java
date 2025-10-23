@@ -67,6 +67,13 @@ public class Main{
 
     private static void addAnimal() {
         Zoo zoo = new Zoo();
+        Scanner sc = new Scanner(System.in);
+        String animalID = sc.nextLine();
+        for (Animal a : zoo.getAnimals()) {
+            if (a.getAnimalID().equals(animalID)) {
+
+            }
+        }
 
     }
 }
