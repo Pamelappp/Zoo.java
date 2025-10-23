@@ -15,6 +15,8 @@ public class Main{
             int choice = sc.nextInt();
             switch (choice) {
                 case 1: viewAnimals(); break;
+                case 2: viewKeepers(); break;
+
             }
         }
 
@@ -59,12 +61,12 @@ public class Main{
         for (Keeper k : zoo.getKeepers()) {
             System.out.println("ID: "+k.getKeeperID());
             System.out.println("Name: "+k.getName());
-
         }
 
+    }
 
-
-
+    private static void addAnimal() {
+        Zoo zoo = new Zoo();
 
     }
 }
