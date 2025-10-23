@@ -3,8 +3,8 @@ package animal;
 import exceptions.OverfeedException;
 
 public class Elephant extends animal.Animal {
-    private final double PORTIONFACTOR = 0.03;
-
+    private final double PORTION_FACTOR = 0.03;
+    //
     public Elephant(String animalId, String name, double weightKg, int requiredMealsPerDay) {
         super(animalId, name, "", weightKg, "", requiredMealsPerDay);
         this.species = "Elephant";
@@ -23,6 +23,6 @@ public class Elephant extends animal.Animal {
 
     @Override
     public double dailyPortionKg() {
-        return PORTIONFACTOR * weightKg;
+        return PORTION_FACTOR * weightKg;
     }
 }
