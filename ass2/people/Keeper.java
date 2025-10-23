@@ -31,6 +31,7 @@ public class Keeper {
         if (a == null) {
             return;
         }
+
         if (assignedAnimals.contains(a)) {
             return;
         }
