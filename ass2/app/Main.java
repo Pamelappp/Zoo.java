@@ -16,6 +16,11 @@ public class Main{
             switch (choice) {
                 case 1: viewAnimals(); break;
                 case 2: viewKeepers(); break;
+                case 3: addAnimal(); break;
+                case 4: removeAnimal(); break;
+                case 5: addKeeper(); break;
+                case 6: removeKeeper(); break;
+
 
             }
         }
@@ -68,12 +73,90 @@ public class Main{
     private static void addAnimal() {
         Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
+        System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine();
         for (Animal a : zoo.getAnimals()) {
             if (a.getAnimalID().equals(animalID)) {
-
+                System.out.println("This animal already exists!");
+                return;
             }
         }
+        System.out.print("Enter animal name: ");
+        String animalName = sc.nextLine();
+        System.out.print("Enter animal weight: ");
+        double weightKg = sc.nextDouble();
+        System.out.print("Enter animal requirement meal per day: ");
+        int requiredMealsPerDay = sc.nextInt();
 
+        boolean speciesChoose = true;
+        while (speciesChoose) {
+            System.out.print("Enter animal species (1. Elephant 2.Lion 3.Penguin): ");
+            String speciesNumber = sc.nextLine();
+
+            switch (speciesNumber) {
+                case "1":
+                    Elephant elephant = new Elephant(animalID, animalName, weightKg, requiredMealsPerDay);
+                    zoo.addAnimal(elephant);
+                    speciesChoose = false;
+                    break;
+                case "2":
+                    Lion lion = new Lion(animalID, animalName, weightKg, requiredMealsPerDay);
+                    zoo.addAnimal(lion);
+                    speciesChoose = false;
+                    break;
+                case "3":
+                    Penguin penguin = new Penguin(animalID, animalName, weightKg, requiredMealsPerDay);
+                    zoo.addAnimal(penguin);
+                    speciesChoose = false;
+                    break;
+                default:
+                    System.out.println("Invalid species!");
+
+            }
+
+        }
+        sc.close();
+    }
+    private static void removeAnimal(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter animal ID: ");
+        Zoo zoo = new Zoo();
+        String animalID = sc.nextLine();
+        for (Animal a : zoo.getAnimals()) {
+            if (!a.getAnimalID().equals(animalID)) {
+                System.out.println("This animal does not exist!");
+            }
+        }
+        if(zoo.removeAnimal(animalID)){
+            System.out.println("Animal removed!");
+        }
+        else{
+            System.out.println("Removing animal failed!");
+        }
+        sc.close();
+
+
+    }
+
+    private static void addKeeper() {
+        Zoo zoo = new Zoo();
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter keeper ID: ");
+        String keeperID = sc.nextLine();
+        for (Keeper k : zoo.getKeepers()) {
+            if (!k.getKeeperID().equals(keeperID)) {
+                System.out.println("This keeper does not exist!");
+                return;
+            }
+        }
+        System.out.print("Enter keeper name: ");
+        String keeperName = sc.nextLine();
+        Keeper keeper = new Keeper(keeperID, keeperName);
+        zoo.addKeeper(keeper);
+        sc.close();
+    }
+
+    private static void removeKeeper() {
+        Scanner sc = new Scanner(System.in);
     }
 }
