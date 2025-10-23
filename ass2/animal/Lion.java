@@ -4,6 +4,7 @@ import exceptions.OverfeedException;
 
 public class Lion extends animal.Animal {
     private final double PORTIONFACTOR = 0.05;
+    private final String NAME = "Penguin";
 
     public Lion(String animalId, String name, double weightKg, int requiredMealsPerDay) {
         super(animalId, name, "", weightKg, "", requiredMealsPerDay);
