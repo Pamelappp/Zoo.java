@@ -1,6 +1,7 @@
 package core;
 
 import animal.Animal;
+import exceptions.ExpertiseMismatchException;
 import people.Keeper;
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ public class Zoo {
     private ArrayList<Keeper> keepers = new ArrayList<>();
 
 
-    public boolean assignKeeperToAnimal(String keeperID, String animalID) {
+    public boolean assignKeeperToAnimal(String keeperID, String animalID) throws ExpertiseMismatchException {
         if (keeperID == null || animalID == null){
             return false;
         }
@@ -22,6 +23,8 @@ public class Zoo {
                         return true;
                     }
                 }
+            }else{
+                System.out.println("Not found keeper ID: " + keeperID);
             }
         }
         return false;
