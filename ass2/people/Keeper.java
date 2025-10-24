@@ -1,5 +1,6 @@
 package people;
 import animal.Animal;
+import exceptions.ExpertiseMismatchException;
 
 import java.util.ArrayList;
 
@@ -27,9 +28,14 @@ public class Keeper {
         }
     }
 
-    public void assignAnimal(Animal a){
+    public void assignAnimal(Animal a) throws ExpertiseMismatchException {
         if (a == null) {
             return;
+        }
+
+        String species = a.getSpecies();
+        if (!expertiseSpecies.contains(species)) {
+            throw new ExpertiseMismatchException("The keeper cannot manage this species");
         }
 
         if (assignedAnimals.contains(a)) {
