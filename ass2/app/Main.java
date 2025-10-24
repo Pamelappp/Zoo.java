@@ -2,12 +2,15 @@ package app;
 
 import animal.*;
 import core.Zoo;
+import exceptions.ExpertiseMismatchException;
+import exceptions.InvalidPortionException;
+import exceptions.OverfeedException;
 import people.Keeper;
 import java.util.*;
 
 
 public class Main{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExpertiseMismatchException, InvalidPortionException, OverfeedException {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -21,14 +24,13 @@ public class Main{
                 case 5: addKeeper(); break;
                 case 6: removeKeeper(); break;
                 case 7: assignKeeperToAnimal(); break;
+                case 8: feedAnimal(); break;
                 case 10: zooSummary(); break;
-
-
+                case 0: return;
             }
         }
 
     }
-
 
 
     private static void printMenu() {
@@ -41,11 +43,10 @@ public class Main{
         System.out.println("6: Remove keeper");
         System.out.println("7: Assign keeper to animal");
         System.out.println("8: Feed animal (default)");
-        System.out.println("9: Feed animal (custom portion)");
-        System.out.println("10: Summary");
+        System.out.println("9: 邪恶lyj");
+        System.out.println("10: Zoo Summary");
         System.out.println("0: Exit");
     }
-
 
     private static void viewAnimals() {
         Zoo zoo = new Zoo();
@@ -160,7 +161,7 @@ public class Main{
         sc.close();
     }
 
-    private static void assignKeeperToAnimal() {
+    private static void assignKeeperToAnimal() throws ExpertiseMismatchException {
         Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
@@ -176,6 +177,29 @@ public class Main{
             }
         }
         sc.close();
+    }
+
+    private static void feedAnimal() throws OverfeedException, InvalidPortionException {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter animal ID: ");
+        String animalID = sc.nextLine().trim();
+        Zoo zoo = new Zoo();
+        if (zoo.findAnimals(animalID)) {
+            System.out.println("Enter the feed portion (1.Default 2.Custom): ");
+            int choice = sc.nextInt();
+            if (choice == 1) {
+                zoo.feedAnimal(animalID);
+            }else if (choice == 2) {
+                System.out.println("The amount of feed:");
+                double feed = sc.nextDouble();
+                zoo.feedAnimal(animalID,feed);
+            }else{
+                System.out.println("Invalid choice!");
+            }
+        }else{
+            System.out.println("Animal does not exist!");
+        }
+
     }
 
     private static void zooSummary() {

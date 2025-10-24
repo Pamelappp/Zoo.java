@@ -49,7 +49,7 @@ public class Keeper {
     public void displayAssignedAnimals(){
         System.out.println("Keeper ID: " + keeperID + " Name: " + name + " Assigned Animals:");
         for (Animal a : assignedAnimals) {
-            System.out.println("\t" + a);
+            System.out.println("\t" + "Animal ID: " +a.getAnimalID()+ "Animal Name: " +a.getName()+" Species: "+a.getSpecies());
         }
 
     }
@@ -66,9 +66,7 @@ public class Keeper {
     public ArrayList<Animal> getAssignedAnimals() {
         return assignedAnimals;
     }
-    public void setName(String name){
-        this.name = name;
-    }
+
 
 
 }

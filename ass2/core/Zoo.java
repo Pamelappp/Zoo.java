@@ -59,14 +59,7 @@ public class Zoo {
 
         }else {
             for (Animal a : animals) {
-                System.out.println("ID: " + a.getAnimalID());
-                System.out.println("Name: " + a.getName());
-                System.out.println("Weight: " + a.getWeightKg());
-                System.out.println("Species: " + a.getSpecies());
-                System.out.println("Diet Profile" + a.getDietProfile());
-                System.out.println("Requirement meal per day" + a.getRequiredMealsPerDay());
-                System.out.println("ActualFeedCount" + a.getActualFeedCount());
-                System.out.println("Total portion per day" + a.getTotalPortionPerDay());
+                a.displayStatus();
             }
         }
     }
@@ -79,6 +72,7 @@ public class Zoo {
             for (Keeper k : keepers) {
                 System.out.println("ID: " + k.getKeeperID());
                 System.out.println("Name: " + k.getName());
+                k.displayAssignedAnimals();
             }
         }
     }
