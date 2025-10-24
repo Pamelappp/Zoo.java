@@ -10,19 +10,21 @@ public class Zoo {
     private ArrayList<Keeper> keepers = new ArrayList<>();
 
 
-    public void assignKeeperToAnimal(String keeperID, String animalID) {
+    public boolean assignKeeperToAnimal(String keeperID, String animalID) {
         if (keeperID == null || animalID == null){
-            return;
+            return false;
         }
         for (Keeper k : keepers) {
             if (k.getKeeperID().equals(keeperID)) {
                 for (Animal a : animals) {
                     if (a.getAnimalID().equals(animalID)){
                         k.assignAnimal(a);
+                        return true;
                     }
                 }
             }
         }
+        return false;
     }
 
     public void feedAnimal(String animalID) throws exceptions.OverfeedException {
@@ -35,7 +37,6 @@ public class Zoo {
             }
         }
     }
-
 
     public void feedAnimal(String animalID, double portionKg) throws exceptions.InvalidPortionException, exceptions.OverfeedException {
         if (animalID == null||portionKg <= 0) {
@@ -50,22 +51,41 @@ public class Zoo {
 
     public void displayAllAnimals() {
         System.out.println("The animals are: ");
-        for (Animal a : animals) {
-            System.out.println(a);
+        if (animals.isEmpty()) {
+            System.out.println("There is no animal");
+
+        }else {
+            for (Animal a : animals) {
+                System.out.println("ID: " + a.getAnimalID());
+                System.out.println("Name: " + a.getName());
+                System.out.println("Weight: " + a.getWeightKg());
+                System.out.println("Species: " + a.getSpecies());
+                System.out.println("Diet Profile" + a.getDietProfile());
+                System.out.println("Requirement meal per day" + a.getRequiredMealsPerDay());
+                System.out.println("ActualFeedCount" + a.getActualFeedCount());
+                System.out.println("Total portion per day" + a.getTotalPortionPerDay());
+            }
         }
     }
 
     public void displayAllKeepers() {
-        System.out.println("The keepers are: ");
-        for (Keeper k : keepers) {
-            System.out.println(k);
+        if (keepers.isEmpty()) {
+            System.out.println("There is no keeper");
+        }else{
+            System.out.println("The keepers are: ");
+            for (Keeper k : keepers) {
+                System.out.println("ID: " + k.getKeeperID());
+                System.out.println("Name: " + k.getName());
+            }
         }
     }
 
     public void summary(){
         System.out.println("=== Zoo Summary ===");
         System.out.println("Total animals: " + animals.size());
+        displayAllAnimals();
         System.out.println("Total keepers: " + keepers.size());
+        displayAllKeepers();
 
     }
 
@@ -103,7 +123,6 @@ public class Zoo {
         return keepers;
     }
 
-
     public boolean removeAnimal(String animalID) {
         if (animalID == null) {
             return false;
@@ -124,9 +143,30 @@ public class Zoo {
         for (Keeper k : keepers) {
             if (k.getKeeperID().equals(KeeperID)) {
                 keepers.remove(k);
+            }else{
+                System.out.println("The keeper" + KeeperID + "is not in the zoo.");
+                return false;
             }
         }
         return true;
+    }
+
+    public boolean findAnimals(String animalID) {
+        for (Animal animal : animals) {
+            if (animal.getAnimalID().equals(animalID)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean findKeepers(String keeperID) {
+        for (Keeper keeper : keepers) {
+            if (keeper.getKeeperID().equals(keeperID)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 
