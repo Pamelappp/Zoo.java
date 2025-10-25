@@ -16,6 +16,7 @@ public class Main{
         while (true) {
             printMenu();
             int choice = sc.nextInt();
+            sc.nextLine();
             switch (choice) {
                 case 1: viewAnimals(); break;
                 case 2: viewKeepers(); break;

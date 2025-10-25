@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
 public class Keeper {
-    private final String keeperID;
+    private String keeperID;
     private String name;
     private ArrayList<String> expertiseSpecies = new ArrayList<>();
     private ArrayList<Animal> assignedAnimals = new ArrayList<>();
