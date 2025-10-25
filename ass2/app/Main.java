@@ -39,7 +39,7 @@ public class Main{
 
 
     private static void printMenu() {
-        System.out.println("\n====ZOO-MENU====");
+        System.out.println("\n=========ZOO-MENU=========");
         System.out.println("1: View animals");
         System.out.println("2: View keepers");
         System.out.println("3: Add animal");
@@ -51,6 +51,7 @@ public class Main{
         System.out.println("9: 邪恶yj");
         System.out.println("10: Zoo Summary");
         System.out.println("0: Exit");
+        System.out.println("==========================");
     }
 
     private static void viewAnimals() {
@@ -114,7 +115,6 @@ public class Main{
         if (animalAdded) {
             System.out.println("Animal added successfully!");
         }
-        sc.close();
     }
 
     private static void removeAnimal(){
@@ -133,7 +133,6 @@ public class Main{
         else{
             System.out.println("Removing animal failed!");
         }
-        sc.close();
     }
 
     private static void addKeeper() {
@@ -153,7 +152,6 @@ public class Main{
         if(zoo.addKeeper(keeper)){
             System.out.println("Keeper added successfully!");
         }
-        sc.close();
     }
 
     private static void removeKeeper() {
@@ -165,7 +163,6 @@ public class Main{
         }else{
             System.out.println("Removing keeper failed!");
         }
-        sc.close();
     }
 
     private static void assignKeeperToAnimal() throws ExpertiseMismatchException {
@@ -183,7 +180,6 @@ public class Main{
                 System.out.println("Animal assignment failed!");
             }
         }
-        sc.close();
     }
 
     private static void feedAnimal() throws OverfeedException, InvalidPortionException {
@@ -206,7 +202,6 @@ public class Main{
         }else{
             System.out.println("Animal does not exist!");
         }
-        sc.close();
     }
 
     private static void zooSummary() {

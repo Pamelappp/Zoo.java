@@ -37,7 +37,7 @@ public class Zoo {
         for (Animal a : animals) {
             if (a.getAnimalID().equals(animalID)) {
                 a.feed(a.getDietProfile());
-                System.out.println( a.getAnimalID()+"has been feeded"+a.getActualFeedCount()+"/"+a.getRequiredMealsPerDay() );
+                //System.out.println( a.getAnimalID()+"has been feeded"+a.getActualFeedCount()+"/"+a.getRequiredMealsPerDay() );
 
             }
         }
