@@ -26,7 +26,11 @@ public class Main{
                 case 7: assignKeeperToAnimal(); break;
                 case 8: feedAnimal(); break;
                 case 10: zooSummary(); break;
-                case 0: return;
+                case 0:
+                    sc.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice.");
             }
         }
 
@@ -34,7 +38,7 @@ public class Main{
 
 
     private static void printMenu() {
-        System.out.println("\n=== Zoo Menu ===");
+        System.out.println("\n====ZOO-MENU====");
         System.out.println("1: View animals");
         System.out.println("2: View keepers");
         System.out.println("3: Add animal");
@@ -73,8 +77,10 @@ public class Main{
         String animalName = sc.nextLine();
         System.out.print("Enter animal weight: ");
         double weightKg = sc.nextDouble();
+        sc.nextLine(); // discard the \n
         System.out.print("Enter animal requirement meal per day: ");
         int requiredMealsPerDay = sc.nextInt();
+        sc.nextLine(); // discard the \n
 
         boolean speciesChoose = true;
         boolean animalAdded = false;
@@ -199,7 +205,7 @@ public class Main{
         }else{
             System.out.println("Animal does not exist!");
         }
-
+        sc.close();
     }
 
     private static void zooSummary() {
