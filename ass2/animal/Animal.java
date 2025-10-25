@@ -57,19 +57,25 @@ public abstract class Animal {
     public abstract void feed(String food) throws OverfeedException;
 
     public void feed(String food, double portionKg) throws InvalidPortionException, OverfeedException {
-        if (portionKg <= 0) throw new InvalidPortionException("Portion KG must be greater than 0.");
-        if (actualFeedCount == requiredMealsPerDay) throw new OverfeedException("Feeding limit reached. No more feeding allowed.");
-        if (totalPortionPerDay + portionKg > dailyPortionKg()) throw new OverfeedException("This portion would surpass the allowed daily intake.");
+        if (portionKg <= 0) {
+            throw new InvalidPortionException("Portion KG must be greater than 0.");
+        }
+        if (actualFeedCount == requiredMealsPerDay) {
+            throw new OverfeedException("Feeding limit reached. No more feeding allowed.");
+        }
+        if (totalPortionPerDay + portionKg > dailyPortionKg()) {
+            throw new OverfeedException("This portion would surpass the allowed daily intake.");
+        }
 
         actualFeedCount++;
         totalPortionPerDay += portionKg;
-        System.out.printf("Meal %d served - %.2fkg fed. Total fed today: %.2fkg\n", actualFeedCount, portionKg, totalPortionPerDay);
+        System.out.printf("Meal %d served - %.2fkg %c fed. Total fed today: %.2fkg\n", actualFeedCount, portionKg, food, totalPortionPerDay);
     }
 
     public abstract double dailyPortionKg();
 
     public void displayStatus() {
-        System.out.println("========DETAILS========");
+        System.out.println("=====ANIMAL-DETAILS=====");
         System.out.println("Animal ID: " + animalID +
                 "\nName: " + name +
                 "\nSpecies: " + species +

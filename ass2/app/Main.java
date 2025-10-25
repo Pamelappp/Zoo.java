@@ -2,12 +2,13 @@ package app;
 
 import animal.*;
 import core.Zoo;
+import exceptions.ExpertiseMismatchException;
 import people.Keeper;
 import java.util.*;
 
 
 public class Main{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExpertiseMismatchException {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
@@ -160,7 +161,7 @@ public class Main{
         sc.close();
     }
 
-    private static void assignKeeperToAnimal() {
+    private static void assignKeeperToAnimal() throws ExpertiseMismatchException {
         Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
