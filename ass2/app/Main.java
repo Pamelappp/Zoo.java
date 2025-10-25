@@ -43,7 +43,7 @@ public class Main{
         System.out.println("6: Remove keeper");
         System.out.println("7: Assign keeper to animal");
         System.out.println("8: Feed animal (default)");
-        System.out.println("9: 邪恶lyj");
+        System.out.println("9: 邪恶yj");
         System.out.println("10: Zoo Summary");
         System.out.println("0: Exit");
     }
