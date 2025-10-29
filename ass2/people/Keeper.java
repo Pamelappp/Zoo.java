@@ -23,8 +23,10 @@ public class Keeper {
         if (species == null || species.isBlank()) {
             return;
         }
-        if (!expertiseSpecies.contains(species)) {
-            expertiseSpecies.add(species);
+        if (!expertiseSpecies.contains(species.toLowerCase())) {
+            expertiseSpecies.add(species.toLowerCase());
+        }else{
+            System.out.println("Expertise already exists!");
         }
     }
 
@@ -33,7 +35,7 @@ public class Keeper {
             return;
         }
 
-        String species = a.getSpecies();
+        String species = a.getSpecies().toLowerCase();
         if (!expertiseSpecies.contains(species)) {
             throw new ExpertiseMismatchException("The keeper cannot manage this species");
         }

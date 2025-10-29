@@ -27,6 +27,7 @@ public class Main{
                 case 6: removeKeeper(); break;
                 case 7: assignKeeperToAnimal(); break;
                 case 8: feedAnimal(); break;
+                case 9: assignExpertiseToKeeper(); break;
                 case 10: zooSummary(); break;
                 case 0:
                     sc.close();
@@ -49,7 +50,7 @@ public class Main{
         System.out.println("6: Remove keeper");
         System.out.println("7: Assign keeper to animal");
         System.out.println("8: Feed animal (default)");
-        System.out.println("9: 邪恶yj");
+        System.out.println("9: Add expertise to keeper");
         System.out.println("10: Zoo Summary");
         System.out.println("0: Exit");
     }
@@ -206,6 +207,22 @@ public class Main{
             System.out.println("Animal does not exist!");
         }
 
+    }
+
+    private static void assignExpertiseToKeeper(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter keeper ID: ");
+        String keeperID = sc.nextLine().trim();
+        if (zoo.findKeepers(keeperID)) {
+            System.out.println("Enter the expertise: ");
+            String expertise = sc.nextLine().trim();
+            for (Keeper keeper : zoo.getKeepers()) {
+                if (keeper.getKeeperID().equals(keeperID)) {
+                    keeper.addExpertise(expertise);
+                    System.out.println("Expertise added successfully!");
+                }
+            }
+        }
     }
 
     private static void zooSummary() {
