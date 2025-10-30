@@ -7,19 +7,21 @@ import exceptions.OverfeedException;
 import people.*;
 
 public class Tests {
+    private static final double DELTA = 0.00001;
+
     public static void testSpeciesFormulaCalculation() {
         Animal lion = new Lion("001", "Amy", 100, 2);
         Animal elephant = new Elephant("002", "Bob", 1200, 3);
         Animal penguin = new Penguin("003", "Carl", 30, 2);
 
-        double exceptForLion = 2.5;
-        double exceptForElephant = 12;
-        double exceptForPenguin = 0.9;
-        assertEquals(exceptForLion, lion.dailyPortionKg(),
+        double exceptForLion = 5;
+        double exceptForElephant = 36;
+        double exceptForPenguin = 1.8;
+        assertEquals(exceptForLion, lion.dailyPortionKg(), DELTA,
                 "The portion formula of lions should be 0.05 * weight");
-        assertEquals(exceptForElephant, elephant.dailyPortionKg(),
+        assertEquals(exceptForElephant, elephant.dailyPortionKg(), DELTA,
                 "The portion formula of elephants should be 0.03 * weight");
-        assertEquals(exceptForPenguin, penguin.dailyPortionKg(),
+        assertEquals(exceptForPenguin, penguin.dailyPortionKg(), DELTA,
                 "The portion formula of penguins should be 0.06 * weight");
     }
 
@@ -34,7 +36,7 @@ public class Tests {
             assertEquals(exceptFeedDefault, lion.getTotalPortionPerDay(),
                     "The lion should be fed default portion.");
             lion.feed("meat", 1);
-            assertEquals(exceptFeedCustom, lion.getActualFeedCount() - exceptFeedDefault,
+            assertEquals(exceptFeedCustom, lion.getTotalPortionPerDay() - exceptFeedDefault,
                     "The lion should be fed 1kg.");
         } catch (Exception e) {
             fail("feed methods meet some unexpected exeption." + e);
