@@ -98,7 +98,7 @@ public class Zoo {
         }
         for (Animal an : animals) {
             if (an.equals(a)) {
-                System.out.println("The animal" + an + "is already in the zoo.");
+                System.out.println("The animal" + an.getAnimalID() + "is already in the zoo.");
                 return false;
             }
         }

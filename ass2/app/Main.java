@@ -80,12 +80,32 @@ public class Main{
 
         System.out.print("Enter animal name: ");
         String animalName = sc.nextLine();
-        System.out.print("Enter animal weight: ");
-        double weightKg = sc.nextDouble();
-        sc.nextLine(); // discard the \n
-        System.out.print("Enter animal requirement meal per day: ");
-        int requiredMealsPerDay = sc.nextInt();
-        sc.nextLine(); // discard the \n
+
+        double weightKg = 0;
+        do {
+            try {
+                System.out.print("Enter animal weight(kg): ");
+                weightKg = sc.nextDouble();
+                sc.nextLine(); // discard the \n
+                if (weightKg <= 0) System.out.println("Please enter a positive number!");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input, Please enter a numeric value for weight!");
+                sc.nextLine();
+            }
+        } while (weightKg <= 0);
+
+        int requiredMealsPerDay = 0;
+        do {
+            try {
+                System.out.print("Enter animal requirement meal per day: ");
+                requiredMealsPerDay = sc.nextInt();
+                sc.nextLine(); // discard the \n
+                if (requiredMealsPerDay < 1) System.out.println("Please enter a positive integer!");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input, Please enter a numeric integer for required meals!");
+                sc.nextLine();
+            }
+        } while (requiredMealsPerDay < 1);
 
         boolean speciesChoose = true;
         boolean animalAdded = false;
