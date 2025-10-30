@@ -172,6 +172,26 @@ public class Zoo {
         return false;
     }
 
+    public void assignExpertiseToKeeper(String keeperID, String expertise) {
+        if (expertise == null||expertise.isEmpty()) {
+            return;
+        }
+        if (keeperID == null) {
+            return;
+        }
+        if (findAnimals(keeperID)) {
+            for (Keeper keeper : keepers) {
+                if (keeper.getKeeperID().equals(keeperID)) {
+                    keeper.addExpertise(expertise);
+                    System.out.println("The expertise" + expertise + "is added to the ."+ keeper.getName()+".");
+                }
+            }
+        }else{
+            System.out.println("The keeper is not in the zoo.");
+        }
+        }
+
+
 
 }
 

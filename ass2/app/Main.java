@@ -27,7 +27,7 @@ public class Main{
                 case 6: removeKeeper(); break;
                 case 7: assignKeeperToAnimal(); break;
                 case 8: feedAnimal(); break;
-                case 9: assignExpertiseToKeeper(); break;
+                case 9: assignExpertise(); break;
                 case 10: zooSummary(); break;
                 case 0:
                     sc.close();
@@ -209,20 +209,16 @@ public class Main{
 
     }
 
-    private static void assignExpertiseToKeeper(){
+    private static void assignExpertise(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
         if (zoo.findKeepers(keeperID)) {
             System.out.println("Enter the expertise: ");
             String expertise = sc.nextLine().trim();
-            for (Keeper keeper : zoo.getKeepers()) {
-                if (keeper.getKeeperID().equals(keeperID)) {
-                    keeper.addExpertise(expertise);
-                    System.out.println("Expertise added successfully!");
-                }
+            zoo.assignExpertiseToKeeper(keeperID, expertise.toLowerCase());
             }
-        }
+
     }
 
     private static void zooSummary() {
