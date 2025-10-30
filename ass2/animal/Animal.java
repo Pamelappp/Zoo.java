@@ -84,7 +84,7 @@ public abstract class Animal {
         System.out.println("======FEEDING-LOG======");
         System.out.println("Meals required: " + requiredMealsPerDay +
                 "\nMeals given: " + actualFeedCount +
-                "\nTotal fed: " + String.format(".2f", totalPortionPerDay) + "kg");
+                "\nTotal fed: " + String.format("%.2f", totalPortionPerDay) + "kg");
         System.out.println("=======================");
     }
 }

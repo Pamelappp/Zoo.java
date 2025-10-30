@@ -19,14 +19,16 @@ public class Keeper {
         this.name = name;
     }
 
-    public void addExpertise(String species) {
+    public boolean addExpertise(String species) {
         if (species == null || species.isBlank()) {
-            return;
+            return false;
         }
         if (!expertiseSpecies.contains(species.toLowerCase())) {
             expertiseSpecies.add(species.toLowerCase());
+            return true;
         }else{
             System.out.println("Expertise already exists!");
+            return false;
         }
     }
 
@@ -49,9 +51,9 @@ public class Keeper {
     }
 
     public void displayAssignedAnimals(){
-        System.out.println("Keeper ID: " + keeperID + " Name: " + name + " Assigned Animals:");
+        //System.out.println("Keeper ID: " + keeperID + " Name: " + name + " Assigned Animals:");
         for (Animal a : assignedAnimals) {
-            System.out.println("\t" + "Animal ID: " +a.getAnimalID()+ "Animal Name: " +a.getName()+" Species: "+a.getSpecies());
+            System.out.println("\t" + "Animal ID: " +a.getAnimalID()+ " Animal Name: " +a.getName()+" Species: "+a.getSpecies());
         }
 
     }

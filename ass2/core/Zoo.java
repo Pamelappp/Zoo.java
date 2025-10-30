@@ -76,6 +76,8 @@ public class Zoo {
             for (Keeper k : keepers) {
                 System.out.println("ID: " + k.getKeeperID());
                 System.out.println("Name: " + k.getName());
+                System.out.println("Expertise: " + k.getExpertiseSpecies());
+                System.out.println("Assigned Animals:");
                 k.displayAssignedAnimals();
             }
         }
@@ -100,9 +102,9 @@ public class Zoo {
                 return false;
             }
         }
-        System.out.println("zoo add animal test");
-        animals.add(a);
-        System.out.println(animals);
+        //System.out.println("zoo add animal test");
+        //animals.add(a);
+        //System.out.println(animals);
         return animals.add(a);
     }
 
@@ -183,8 +185,13 @@ public class Zoo {
         if (findAnimals(keeperID)) {
             for (Keeper keeper : keepers) {
                 if (keeper.getKeeperID().equals(keeperID)) {
-                    keeper.addExpertise(expertise);
-                    System.out.println("The expertise" + expertise + "is added to the ."+ keeper.getName()+".");
+                    if(keeper.addExpertise(expertise)){
+                        System.out.println("The expertise " + expertise + " is added to the keeper"+ keeper.getName()+".");
+                    }
+                    else{
+                        System.out.println("Add failed!");
+                    }
+
                 }
             }
         }else{

@@ -54,6 +54,7 @@ public class Main{
         System.out.println("10: Zoo Summary");
         System.out.println("0: Exit");
         System.out.println("==========================");
+        System.out.print("Enter your choice: ");
     }
 
     private static void viewAnimals() {
@@ -215,7 +216,7 @@ public class Main{
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
         if (Zoo.findKeepers(keeperID)) {
-            System.out.println("Enter the expertise: ");
+            System.out.print("Enter the expertise: ");
             String expertise = sc.nextLine().trim();
             Zoo.assignExpertiseToKeeper(keeperID, expertise.toLowerCase());
             }

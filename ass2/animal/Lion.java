@@ -23,7 +23,7 @@ public class Lion extends animal.Animal {
 
         actualFeedCount++;
         totalPortionPerDay += portionKg;
-        System.out.printf("Meal %d served - %.2fkg %c fed. Total fed today: %.2fkg\n", actualFeedCount, portionKg, food, totalPortionPerDay);
+        System.out.printf("Meal %d served - %.2fkg %s fed. Total fed today: %.2fkg\n", actualFeedCount, portionKg, food, totalPortionPerDay);
     }
 
     @Override
