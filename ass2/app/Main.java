@@ -10,26 +10,24 @@ import java.util.*;
 
 
 public class Main{
-    //static Zoo zoo = new Zoo();
-    public static void main(String[] args) throws ExpertiseMismatchException, InvalidPortionException, OverfeedException {
+    public static void main(String[] args) throws ExpertiseMismatchException {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             printMenu();
-            int choice = sc.nextInt();
-            sc.nextLine(); // discard the \n
+            String choice = sc.nextLine();
             switch (choice) {
-                case 1: viewAnimals(); break;
-                case 2: viewKeepers(); break;
-                case 3: addAnimal(); break;
-                case 4: removeAnimal(); break;
-                case 5: addKeeper(); break;
-                case 6: removeKeeper(); break;
-                case 7: assignKeeperToAnimal(); break;
-                case 8: feedAnimal(); break;
-                case 9: assignExpertise(); break;
-                case 10: zooSummary(); break;
-                case 0:
+                case "1": viewAnimals(); break;
+                case "2": viewKeepers(); break;
+                case "3": addAnimal(); break;
+                case "4": removeAnimal(); break;
+                case "5": addKeeper(); break;
+                case "6": removeKeeper(); break;
+                case "7": assignKeeperToAnimal(); break;
+                case "8": feedAnimal(); break;
+                case "9": assignExpertise(); break;
+                case "10": zooSummary(); break;
+                case "0":
                     sc.close();
                     return;
                 default:
@@ -58,17 +56,14 @@ public class Main{
     }
 
     private static void viewAnimals() {
-        //Zoo zoo = new Zoo();
         Zoo.displayAllAnimals();
     }
 
     private static void viewKeepers() {
-        //Zoo zoo = new Zoo();
         Zoo.displayAllKeepers();
     }
 
     private static void addAnimal() {
-        //Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine().trim();
@@ -138,7 +133,6 @@ public class Main{
         if (animalAdded) {
             System.out.println("Animal added successfully!");
         }
-        //sc.close();
     }
 
     private static void removeAnimal(){
@@ -149,6 +143,7 @@ public class Main{
 
         if (!Zoo.findAnimals(animalID)) {
             System.out.println("This animal does not exist!");
+            return;
         }
 
         if(Zoo.removeAnimal(animalID)){
@@ -160,7 +155,6 @@ public class Main{
     }
 
     private static void addKeeper() {
-        //Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
@@ -181,7 +175,14 @@ public class Main{
     private static void removeKeeper() {
         //Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
+        System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
+
+        if (!Zoo.findKeepers(keeperID)) {
+            System.out.println("This keeper does not exist!");
+            return;
+        }
+
         if (Zoo.removeKeeper(keeperID)) {
             System.out.println("Keeper removed!");
         }else{
@@ -190,38 +191,64 @@ public class Main{
 
     }
 
-    private static void assignKeeperToAnimal() throws ExpertiseMismatchException {
-        //Zoo zoo = new Zoo();
+    private static void assignKeeperToAnimal() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine().trim();
+        if (!Zoo.findAnimals(animalID)) {
+            System.out.println("This animal does not exist!");
+            return;
+        }
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
-
-        if (Zoo.findAnimals(animalID)|| Zoo.findKeepers(keeperID)) {
+        if (!Zoo.findKeepers(keeperID)) {
+            System.out.println("This keeper does not exist!");
+            return;
+        }
+        try {
             if(Zoo.assignKeeperToAnimal(animalID, keeperID)){
                 System.out.println("Animal assigned successfully!");
             }else{
                 System.out.println("Animal assignment failed!");
             }
+        } catch (ExpertiseMismatchException e) {
+            System.out.println(e.getMessage());
         }
 
     }
 
-    private static void feedAnimal() throws OverfeedException, InvalidPortionException {
+    private static void feedAnimal(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine().trim();
-        //Zoo zoo = new Zoo();
+
         if (Zoo.findAnimals(animalID)) {
             System.out.println("Enter the feed portion (1.Default 2.Custom): ");
             String choice = sc.nextLine().trim();
             if (choice.equals("1")) {
-                Zoo.feedAnimal(animalID);
+                try {
+                    Zoo.feedAnimal(animalID);
+                }  catch (OverfeedException e) {
+                    System.out.println(e.getMessage());
+                }
             }else if (choice.equals("2")) {
-                System.out.println("The amount of feed:");
-                double feed = sc.nextDouble();
-                Zoo.feedAnimal(animalID,feed);
+                double feedPortion = 0;
+                do {
+                    try{
+                        System.out.println("The amount of feed:");
+                        feedPortion = sc.nextDouble();
+                        sc.nextLine(); // discard the \n
+                        Zoo.feedAnimal(animalID,feedPortion);
+                        break;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Please enter a numeric value for portion!");
+                        sc.nextLine();
+                    } catch (InvalidPortionException e) {
+                        System.out.println(e.getMessage());
+                    } catch (OverfeedException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } while (true);
             }else{
                 System.out.println("Invalid choice!");
             }
@@ -235,16 +262,17 @@ public class Main{
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
+
         if (Zoo.findKeepers(keeperID)) {
             System.out.print("Enter the expertise: ");
             String expertise = sc.nextLine().trim();
             Zoo.assignExpertiseToKeeper(keeperID, expertise.toLowerCase());
+            return;
             }
-
+        System.out.println("This keeper does not exist!");
     }
 
     private static void zooSummary() {
-        //Zoo zoo = new Zoo();
         Zoo.summary();
     }
 
