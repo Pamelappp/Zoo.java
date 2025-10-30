@@ -23,8 +23,6 @@ public class Zoo {
                         return true;
                     }
                 }
-            }else{
-                System.out.println("Not found keeper ID: " + keeperID);
             }
         }
         return false;
@@ -39,14 +37,13 @@ public class Zoo {
                 a.feed(a.getDietProfile());
                 //System.out.println( a.getAnimalID()+"has been feeded"+a.getActualFeedCount()+"/"+a.getRequiredMealsPerDay() );
                 return;
-
             }
         }
 
     }
 
     public static void feedAnimal(String animalID, double portionKg) throws exceptions.InvalidPortionException, exceptions.OverfeedException {
-        if (animalID == null||portionKg <= 0) {
+        if (animalID == null) {
             return;
         }
         for (Animal a : animals) {
@@ -136,10 +133,10 @@ public class Zoo {
         for (Animal a : animals) {
             if (a.getAnimalID().equals(animalID)) {
                 animals.remove(a);
-
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static boolean removeKeeper(String KeeperID) {
@@ -149,12 +146,10 @@ public class Zoo {
         for (Keeper k : keepers) {
             if (k.getKeeperID().equals(KeeperID)) {
                 keepers.remove(k);
-            }else{
-                System.out.println("The keeper" + KeeperID + "is not in the zoo.");
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static boolean findAnimals(String animalID) {
@@ -182,22 +177,20 @@ public class Zoo {
         if (keeperID == null) {
             return;
         }
-        if (findAnimals(keeperID)) {
-            for (Keeper keeper : keepers) {
-                if (keeper.getKeeperID().equals(keeperID)) {
-                    if(keeper.addExpertise(expertise)){
-                        System.out.println("The expertise " + expertise + " is added to the keeper"+ keeper.getName()+".");
-                    }
-                    else{
-                        System.out.println("Add failed!");
-                    }
 
+        for (Keeper keeper : keepers) {
+            if (keeper.getKeeperID().equals(keeperID)) {
+                if(keeper.addExpertise(expertise)){
+                    System.out.println("The expertise " + expertise + " is added to the keeper"+ keeper.getName()+".");
                 }
+                else{
+                    System.out.println("Add failed!");
+                }
+                return;
             }
-        }else{
-            System.out.println("The keeper is not in the zoo.");
         }
-        }
+        System.out.println("The keeper is not in the zoo.");
+    }
 
 
 
