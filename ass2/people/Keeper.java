@@ -41,7 +41,7 @@ public class Keeper {
         }
 
         if (assignedAnimals.contains(a)) {
-            System.out.println("You already have an animal with that species");
+            System.out.println("The keeper has already managed this animal!");
             return;
         }
         assignedAnimals.add(a);

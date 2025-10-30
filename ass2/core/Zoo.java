@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 
 public class Zoo {
-    private ArrayList<Animal> animals = new ArrayList<>();
-    private ArrayList<Keeper> keepers = new ArrayList<>();
+    private static ArrayList<Animal> animals = new ArrayList<>();
+    private static ArrayList<Keeper> keepers = new ArrayList<>();
 
 
-    public boolean assignKeeperToAnimal(String keeperID, String animalID) throws ExpertiseMismatchException {
+    public static boolean assignKeeperToAnimal(String keeperID, String animalID) throws ExpertiseMismatchException {
         if (keeperID == null || animalID == null){
             return false;
         }
@@ -30,21 +30,22 @@ public class Zoo {
         return false;
     }
 
-    public void feedAnimal(String animalID) throws exceptions.OverfeedException {
+    public static void feedAnimal(String animalID) throws exceptions.OverfeedException {
         if (animalID == null) {
             return;
         }
         for (Animal a : animals) {
             if (a.getAnimalID().equals(animalID)) {
                 a.feed(a.getDietProfile());
-                System.out.println( a.getAnimalID()+"has been feeded"+a.getActualFeedCount()+"/"+a.getRequiredMealsPerDay() );
+                //System.out.println( a.getAnimalID()+"has been feeded"+a.getActualFeedCount()+"/"+a.getRequiredMealsPerDay() );
                 return;
 
             }
         }
+
     }
 
-    public void feedAnimal(String animalID, double portionKg) throws exceptions.InvalidPortionException, exceptions.OverfeedException {
+    public static void feedAnimal(String animalID, double portionKg) throws exceptions.InvalidPortionException, exceptions.OverfeedException {
         if (animalID == null||portionKg <= 0) {
             return;
         }
@@ -55,7 +56,7 @@ public class Zoo {
         }
     }
 
-    public void displayAllAnimals() {
+    public static void displayAllAnimals() {
         System.out.println("The animals are: ");
         if (animals.isEmpty()) {
             System.out.println("There is no animal");
@@ -67,7 +68,7 @@ public class Zoo {
         }
     }
 
-    public void displayAllKeepers() {
+    public static void displayAllKeepers() {
         if (keepers.isEmpty()) {
             System.out.println("There is no keeper");
         }else{
@@ -80,8 +81,8 @@ public class Zoo {
         }
     }
 
-    public void summary(){
-        System.out.println("=== Zoo Summary ===");
+    public static void summary(){
+        System.out.println("====ZOO-SUMMARY====");
         System.out.println("Total animals: " + animals.size());
         displayAllAnimals();
         System.out.println("Total keepers: " + keepers.size());
@@ -89,7 +90,7 @@ public class Zoo {
 
     }
 
-    public boolean addAnimal(Animal a) {
+    public static boolean addAnimal(Animal a) {
         if (a == null) {
             return false;
         }
@@ -105,7 +106,7 @@ public class Zoo {
         return animals.add(a);
     }
 
-    public boolean addKeeper(Keeper a) {
+    public static boolean addKeeper(Keeper a) {
         if (a == null) {
             return false;
         }
@@ -118,15 +119,15 @@ public class Zoo {
         return keepers.add(a);
     }
 
-    public ArrayList<Animal> getAnimals() {
+    public static ArrayList<Animal> getAnimals() {
         return animals;
     }
 
-    public ArrayList<Keeper> getKeepers() {
+    public static ArrayList<Keeper> getKeepers() {
         return keepers;
     }
 
-    public boolean removeAnimal(String animalID) {
+    public static boolean removeAnimal(String animalID) {
         if (animalID == null) {
             return false;
         }
@@ -139,7 +140,7 @@ public class Zoo {
         return true;
     }
 
-    public boolean removeKeeper(String KeeperID) {
+    public static boolean removeKeeper(String KeeperID) {
         if (KeeperID == null) {
             return false;
         }
@@ -154,7 +155,7 @@ public class Zoo {
         return true;
     }
 
-    public boolean findAnimals(String animalID) {
+    public static boolean findAnimals(String animalID) {
         for (Animal animal : animals) {
             if (animal.getAnimalID().equals(animalID)) {
                 return true;
@@ -163,7 +164,7 @@ public class Zoo {
         return false;
     }
 
-    public boolean findKeepers(String keeperID) {
+    public static boolean findKeepers(String keeperID) {
         for (Keeper keeper : keepers) {
             if (keeper.getKeeperID().equals(keeperID)) {
                 return true;
@@ -172,7 +173,7 @@ public class Zoo {
         return false;
     }
 
-    public void assignExpertiseToKeeper(String keeperID, String expertise) {
+    public static void assignExpertiseToKeeper(String keeperID, String expertise) {
         if (expertise == null||expertise.isEmpty()) {
             return;
         }

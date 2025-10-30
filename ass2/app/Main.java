@@ -10,14 +10,14 @@ import java.util.*;
 
 
 public class Main{
-    static Zoo zoo = new Zoo();
+    //static Zoo zoo = new Zoo();
     public static void main(String[] args) throws ExpertiseMismatchException, InvalidPortionException, OverfeedException {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
             printMenu();
             int choice = sc.nextInt();
-            sc.nextLine();
+            sc.nextLine(); // discard the \n
             switch (choice) {
                 case 1: viewAnimals(); break;
                 case 2: viewKeepers(); break;
@@ -41,7 +41,7 @@ public class Main{
 
 
     private static void printMenu() {
-        System.out.println("\n====ZOO-MENU====");
+        System.out.println("\n=========ZOO-MENU=========");
         System.out.println("1: View animals");
         System.out.println("2: View keepers");
         System.out.println("3: Add animal");
@@ -53,16 +53,17 @@ public class Main{
         System.out.println("9: Add expertise to keeper");
         System.out.println("10: Zoo Summary");
         System.out.println("0: Exit");
+        System.out.println("==========================");
     }
 
     private static void viewAnimals() {
         //Zoo zoo = new Zoo();
-        zoo.displayAllAnimals();
+        Zoo.displayAllAnimals();
     }
 
     private static void viewKeepers() {
         //Zoo zoo = new Zoo();
-        zoo.displayAllKeepers();
+        Zoo.displayAllKeepers();
     }
 
     private static void addAnimal() {
@@ -71,7 +72,7 @@ public class Main{
         System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine().trim();
 
-        if (zoo.findAnimals(animalID)) {
+        if (Zoo.findAnimals(animalID)) {
             System.out.println("This animal already exists!");
             return;
         }
@@ -94,17 +95,17 @@ public class Main{
             switch (speciesNumber) {
                 case "1":
                     Elephant elephant = new Elephant(animalID, animalName, weightKg, requiredMealsPerDay);
-                    animalAdded=zoo.addAnimal(elephant);
+                    animalAdded=Zoo.addAnimal(elephant);
                     speciesChoose = false;
                     break;
                 case "2":
                     Lion lion = new Lion(animalID, animalName, weightKg, requiredMealsPerDay);
-                    animalAdded=zoo.addAnimal(lion);
+                    animalAdded=Zoo.addAnimal(lion);
                     speciesChoose = false;
                     break;
                 case "3":
                     Penguin penguin = new Penguin(animalID, animalName, weightKg, requiredMealsPerDay);
-                    animalAdded=zoo.addAnimal(penguin);
+                    animalAdded=Zoo.addAnimal(penguin);
                     speciesChoose = false;
                     break;
                 default:
@@ -125,11 +126,11 @@ public class Main{
         //Zoo zoo = new Zoo();
         String animalID = sc.nextLine().trim();
 
-        if (!zoo.findAnimals(animalID)) {
+        if (!Zoo.findAnimals(animalID)) {
             System.out.println("This animal does not exist!");
         }
 
-        if(zoo.removeAnimal(animalID)){
+        if(Zoo.removeAnimal(animalID)){
             System.out.println("Animal removed!");
         }
         else{
@@ -143,7 +144,7 @@ public class Main{
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
 
-        if (zoo.findKeepers(keeperID)) {
+        if (Zoo.findKeepers(keeperID)) {
             System.out.println("This keeper does exist!");
             return;
         }
@@ -151,7 +152,7 @@ public class Main{
         System.out.print("Enter keeper name: ");
         String keeperName = sc.nextLine();
         Keeper keeper = new Keeper(keeperID, keeperName);
-        if(zoo.addKeeper(keeper)){
+        if(Zoo.addKeeper(keeper)){
             System.out.println("Keeper added successfully!");
         }
     }
@@ -160,7 +161,7 @@ public class Main{
         //Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
         String keeperID = sc.nextLine().trim();
-        if (zoo.removeKeeper(keeperID)) {
+        if (Zoo.removeKeeper(keeperID)) {
             System.out.println("Keeper removed!");
         }else{
             System.out.println("Removing keeper failed!");
@@ -176,8 +177,8 @@ public class Main{
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
 
-        if (zoo.findAnimals(animalID)|| zoo.findKeepers(keeperID)) {
-            if(zoo.assignKeeperToAnimal(animalID, keeperID)){
+        if (Zoo.findAnimals(animalID)|| Zoo.findKeepers(keeperID)) {
+            if(Zoo.assignKeeperToAnimal(animalID, keeperID)){
                 System.out.println("Animal assigned successfully!");
             }else{
                 System.out.println("Animal assignment failed!");
@@ -191,15 +192,15 @@ public class Main{
         System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine().trim();
         //Zoo zoo = new Zoo();
-        if (zoo.findAnimals(animalID)) {
+        if (Zoo.findAnimals(animalID)) {
             System.out.println("Enter the feed portion (1.Default 2.Custom): ");
             String choice = sc.nextLine().trim();
             if (choice.equals("1")) {
-                zoo.feedAnimal(animalID);
+                Zoo.feedAnimal(animalID);
             }else if (choice.equals("2")) {
                 System.out.println("The amount of feed:");
                 double feed = sc.nextDouble();
-                zoo.feedAnimal(animalID,feed);
+                Zoo.feedAnimal(animalID,feed);
             }else{
                 System.out.println("Invalid choice!");
             }
@@ -213,17 +214,17 @@ public class Main{
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
-        if (zoo.findKeepers(keeperID)) {
+        if (Zoo.findKeepers(keeperID)) {
             System.out.println("Enter the expertise: ");
             String expertise = sc.nextLine().trim();
-            zoo.assignExpertiseToKeeper(keeperID, expertise.toLowerCase());
+            Zoo.assignExpertiseToKeeper(keeperID, expertise.toLowerCase());
             }
 
     }
 
     private static void zooSummary() {
         //Zoo zoo = new Zoo();
-        zoo.summary();
+        Zoo.summary();
     }
 
 
