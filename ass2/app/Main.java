@@ -3,6 +3,7 @@ package app;
 import animal.*;
 import core.Zoo;
 import exceptions.ExpertiseMismatchException;
+import exceptions.InvalidInputException;
 import exceptions.InvalidPortionException;
 import exceptions.OverfeedException;
 import people.Keeper;
@@ -76,31 +77,41 @@ public class Main{
         System.out.print("Enter animal name: ");
         String animalName = sc.nextLine();
 
-        double weightKg = 0;
+        double weightKg;
         do {
             try {
                 System.out.print("Enter animal weight(kg): ");
                 weightKg = sc.nextDouble();
                 sc.nextLine(); // discard the \n
-                if (weightKg <= 0) System.out.println("Please enter a positive number!");
+                if (weightKg <= 0) {
+                    throw new InvalidInputException("Please input a positive value for weight!");
+                }
+                break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input, Please enter a numeric value for weight!");
                 sc.nextLine();
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
             }
-        } while (weightKg <= 0);
+        } while (true);
 
-        int requiredMealsPerDay = 0;
+        int requiredMealsPerDay;
         do {
             try {
                 System.out.print("Enter animal requirement meal per day: ");
                 requiredMealsPerDay = sc.nextInt();
                 sc.nextLine(); // discard the \n
-                if (requiredMealsPerDay < 1) System.out.println("Please enter a positive integer!");
+                if (requiredMealsPerDay < 1) {
+                    throw new InvalidInputException("Please input a positive integer for required meals per day!");
+                }
+                break;
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input, Please enter a numeric integer for required meals!");
                 sc.nextLine();
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
             }
-        } while (requiredMealsPerDay < 1);
+        } while (true);
 
         boolean speciesChoose = true;
         boolean animalAdded = false;
@@ -108,27 +119,27 @@ public class Main{
             System.out.print("Enter animal species (1. Elephant 2.Lion 3.Penguin): ");
             String speciesNumber = sc.nextLine();
 
-            switch (speciesNumber) {
-                case "1":
-                    Elephant elephant = new Elephant(animalID, animalName, weightKg, requiredMealsPerDay);
-                    animalAdded=Zoo.addAnimal(elephant);
-                    speciesChoose = false;
-                    break;
-                case "2":
-                    Lion lion = new Lion(animalID, animalName, weightKg, requiredMealsPerDay);
-                    animalAdded=Zoo.addAnimal(lion);
-                    speciesChoose = false;
-                    break;
-                case "3":
-                    Penguin penguin = new Penguin(animalID, animalName, weightKg, requiredMealsPerDay);
-                    animalAdded=Zoo.addAnimal(penguin);
-                    speciesChoose = false;
-                    break;
-                default:
-                    System.out.println("Invalid species!");
+            try {
+                switch (speciesNumber) {
+                    case "1":
+                        animalAdded=Zoo.addAnimal(animalID, animalName, weightKg, requiredMealsPerDay, "Elephant");
+                        speciesChoose = false;
+                        break;
+                    case "2":
+                        animalAdded=Zoo.addAnimal(animalID, animalName, weightKg, requiredMealsPerDay, "Lion");
+                        speciesChoose = false;
+                        break;
+                    case "3":
+                        animalAdded=Zoo.addAnimal(animalID, animalName, weightKg, requiredMealsPerDay, "Penguin");
+                        speciesChoose = false;
+                        break;
+                    default:
+                        System.out.println("Invalid species!");
 
+                }
+            } catch (InvalidInputException e) {
+                System.out.println(e.getMessage());
             }
-
         }
         if (animalAdded) {
             System.out.println("Animal added successfully!");
