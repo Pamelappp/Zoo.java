@@ -160,7 +160,7 @@ public class Main{
         String keeperID = sc.nextLine().trim();
 
         if (Zoo.findKeepers(keeperID)) {
-            System.out.println("This keeper does exist!");
+            System.out.println("This keeper exists!");
             return;
         }
 
