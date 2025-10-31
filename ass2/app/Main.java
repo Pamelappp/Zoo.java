@@ -238,7 +238,7 @@ public class Main{
         }
         try {
             // Using the method from Zoo class to complete action.
-            if(Zoo.assignKeeperToAnimal(animalID, keeperID)){
+            if(Zoo.assignKeeperToAnimal(keeperID, animalID)){
                 System.out.println("Animal assigned successfully!");
             }else{
                 System.out.println("Animal assignment failed!");
