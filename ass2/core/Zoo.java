@@ -111,7 +111,7 @@ public class Zoo {
         }
         for (Keeper k : keepers) {
             if (k.equals(a)) {
-                System.out.println("The keeper" + a + "is already in the zoo.");
+                System.out.println("The keeper " + a.getKeeperID() + " is already in the zoo.");
                 return false;
             }
         }
@@ -181,7 +181,7 @@ public class Zoo {
         for (Keeper keeper : keepers) {
             if (keeper.getKeeperID().equals(keeperID)) {
                 if(keeper.addExpertise(expertise)){
-                    System.out.println("The expertise " + expertise + " is added to the keeper"+ keeper.getName()+".");
+                    System.out.println("The expertise " + expertise + " is added to the keeper "+ keeper.getName()+".");
                 }
                 else{
                     System.out.println("Add failed!");
