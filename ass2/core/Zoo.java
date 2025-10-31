@@ -138,13 +138,13 @@ public class Zoo {
     }
 
     // Adding keeper to the zoo.
-    public static boolean addKeeper(String name, String keeperID) {
+    public static boolean addKeeper(String keeperID, String name) {
         // Making sure the name and ID not null.
         if (name == null||keeperID == null) {
             return false;
         }
 
-        Keeper a = new Keeper(name, keeperID);
+        Keeper a = new Keeper(keeperID, name);
 
         // Make sure the keeper not in the zoo.
         for (Keeper k : keepers) {
@@ -231,7 +231,7 @@ public class Zoo {
         for (Keeper keeper : keepers) {
             if (keeper.getKeeperID().equals(keeperID)) {
                 if(keeper.addExpertise(expertise)){
-                    System.out.println("The expertise " + expertise + " is added to the keeper "+ keeper.getName()+".");
+                    System.out.println("The expertise " + expertise + " is added to the keeper " + keeper.getName() + ".");
                 }
                 else{
                     System.out.println("Add failed!");
