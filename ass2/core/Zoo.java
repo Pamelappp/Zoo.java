@@ -1,7 +1,13 @@
 package core;
 
 import animal.Animal;
+import animal.Elephant;
+import animal.Lion;
+import animal.Penguin;
 import exceptions.ExpertiseMismatchException;
+import exceptions.InvalidInputException;
+import exceptions.InvalidPortionException;
+import exceptions.OverfeedException;
 import people.Keeper;
 import java.util.ArrayList;
 
@@ -28,7 +34,7 @@ public class Zoo {
         return false;
     }
 
-    public static void feedAnimal(String animalID) throws exceptions.OverfeedException {
+    public static void feedAnimal(String animalID) throws OverfeedException {
         if (animalID == null) {
             return;
         }
@@ -42,7 +48,7 @@ public class Zoo {
 
     }
 
-    public static void feedAnimal(String animalID, double portionKg) throws exceptions.InvalidPortionException, exceptions.OverfeedException {
+    public static void feedAnimal(String animalID, double portionKg) throws InvalidPortionException, OverfeedException {
         if (animalID == null) {
             return;
         }
@@ -89,10 +95,25 @@ public class Zoo {
 
     }
 
-    public static boolean addAnimal(Animal a) {
-        if (a == null) {
+    public static boolean addAnimal(String animalID, String name, double weightKg, int requiredMealsPerDay, String spieces) throws InvalidInputException{
+        if (animalID == null||name == null||spieces == null) {
+            System.out.println("Add animal failed");
             return false;
         }
+        if (weightKg <= 0) {
+            throw new InvalidInputException("Please input a positive value for weight!");
+        }
+
+        if (requiredMealsPerDay < 1) {
+            throw new InvalidInputException("Please input a positive integer for required meals per day!");
+        }
+
+        Animal a;
+        if (spieces.equals("Lion")) a = new Lion(animalID, name, weightKg, requiredMealsPerDay);
+        else if (spieces.equals("Elephant")) a = new Elephant(animalID, name, weightKg, requiredMealsPerDay);
+        else if (spieces.equals("Penguin")) a = new Penguin(animalID, name, weightKg, requiredMealsPerDay);
+        else throw new InvalidInputException("Our zoo don't want this species!");
+
         for (Animal an : animals) {
             if (an.equals(a)) {
                 System.out.println("The animal" + an.getAnimalID() + "is already in the zoo.");
