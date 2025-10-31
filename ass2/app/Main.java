@@ -160,7 +160,6 @@ public class Main{
     private static void removeAnimal(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
-        //Zoo zoo = new Zoo();
         String animalID = sc.nextLine().trim();
 
         // If the zoo does have this animal, show the wrong message.
@@ -200,7 +199,6 @@ public class Main{
 
     //Removing the specific keeper from the zoo.
     private static void removeKeeper() {
-        //Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
@@ -277,15 +275,15 @@ public class Main{
                         System.out.println("The amount of feed:");
                         feedPortion = sc.nextDouble();
                         sc.nextLine(); // discard the \n
-                        Zoo.feedAnimal(animalID,feedPortion);
+                        Zoo.feedAnimal(animalID, feedPortion);
                         break;
                     } catch (InputMismatchException e) {
                         System.out.println("Please enter a numeric value for portion!");
-                        sc.nextLine();
+                        sc.nextLine(); // discard the \n
                     } catch (InvalidPortionException e) {
-                        System.out.println(e.getMessage());
+                        System.out.println(e.getMessage()); // The portionKg should be positive
                     } catch (OverfeedException e) {
-                        System.out.println(e.getMessage());
+                        System.out.println(e.getMessage()); // Prevent the over feed
                     }
                 } while (true);
             }else{
