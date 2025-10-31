@@ -5,12 +5,15 @@ import exceptions.OverfeedException;
 public class Lion extends animal.Animal {
     private final double PORTION_FACTOR = 0.05;
 
+    // The constructor of the Lion.
     public Lion(String animalId, String name, double weightKg, int requiredMealsPerDay) {
         super(animalId, name, "", weightKg, "", requiredMealsPerDay);
         this.species = "Lion";
         this.dietProfile = "CARNIVORE";
     }
 
+
+    // Override the default feed method from Animal class.
     @Override
     public void feed(String food) throws OverfeedException {
         double portionKg = dailyPortionKg() / requiredMealsPerDay;
@@ -26,6 +29,7 @@ public class Lion extends animal.Animal {
         System.out.printf("Meal %d served - %.2fkg %s fed. Total fed today: %.2fkg\n", actualFeedCount, portionKg, food, totalPortionPerDay);
     }
 
+    //Override the calculate daily portion from animal class.
     @Override
     public double dailyPortionKg() {
         return PORTION_FACTOR * weightKg;

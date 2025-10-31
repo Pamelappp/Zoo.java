@@ -44,7 +44,7 @@ public abstract class Animal {
     public double getTotalPortionPerDay() {
         return totalPortionPerDay;
     }
-
+    //The constructor of Animal.
     public Animal(String animalID, String name, String species, double weightKg, String dietProfile, int requiredMealsPerDay) {
         this.animalID = animalID;
         this.name = name;
@@ -54,15 +54,21 @@ public abstract class Animal {
         this.requiredMealsPerDay = requiredMealsPerDay;
     }
 
+    // The default method of feed animal.
     public abstract void feed(String food) throws OverfeedException;
 
+
+    // The custom method of feed animal
     public void feed(String food, double portionKg) throws InvalidPortionException, OverfeedException {
+        // Check if the amount of portion small that 0,make sure all the portion is positive.
         if (portionKg <= 0) {
             throw new InvalidPortionException("Portion KG must be greater than 0.");
         }
+        // Make sure the actual feed count not exceed the required meals per day.
         if (actualFeedCount == requiredMealsPerDay) {
             throw new OverfeedException("Feeding limit reached. No more feeding allowed.");
         }
+        // Make sure the amount of total feed portion not exceed the daily portion.
         if (totalPortionPerDay + portionKg > dailyPortionKg()) {
             throw new OverfeedException("This portion would surpass the allowed daily intake.");
         }
@@ -72,8 +78,10 @@ public abstract class Animal {
         System.out.printf("Meal %d served - %.2fkg %s fed. Total fed today: %.2fkg\n", actualFeedCount, portionKg, food, totalPortionPerDay);
     }
 
+    //The method to calculate the daily portion.
     public abstract double dailyPortionKg();
 
+    // Display the animal details
     public void displayStatus() {
         System.out.println("=====ANIMAL-DETAILS=====");
         System.out.println("Animal ID: " + animalID +

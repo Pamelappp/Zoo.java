@@ -38,7 +38,7 @@ public class Main{
 
     }
 
-
+    // The zoo interface menu
     private static void printMenu() {
         System.out.println("\n=========ZOO-MENU=========");
         System.out.println("1: View animals");
@@ -56,19 +56,23 @@ public class Main{
         System.out.print("Enter your choice: ");
     }
 
+    // The method to view all the animals in the zoo.
     private static void viewAnimals() {
         Zoo.displayAllAnimals();
     }
 
+    // The method to view all the keepers in the zoo.
     private static void viewKeepers() {
         Zoo.displayAllKeepers();
     }
 
+    // The method of add animal to zoo.
     private static void addAnimal() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine().trim();
 
+        //If this animal is existing in the zoo, close the method.
         if (Zoo.findAnimals(animalID)) {
             System.out.println("This animal already exists!");
             return;
@@ -78,6 +82,7 @@ public class Main{
         String animalName = sc.nextLine();
 
         double weightKg;
+        // Using the do-while loop to make sure the animal's weight is valid.
         do {
             try {
                 System.out.print("Enter animal weight(kg): ");
@@ -96,6 +101,7 @@ public class Main{
         } while (true);
 
         int requiredMealsPerDay;
+        // Using the do-while loop to make sure the requiredMealsPerDay is valid.
         do {
             try {
                 System.out.print("Enter animal requirement meal per day: ");
@@ -113,13 +119,16 @@ public class Main{
             }
         } while (true);
 
-        boolean speciesChoose = true;
-        boolean animalAdded = false;
+        boolean speciesChoose = true; // The field to control the loop.
+        boolean animalAdded = false; // The field to record if the animal successes be added.
+
+        //Using while loop to make sure user choose the right loop
         while (speciesChoose) {
             System.out.print("Enter animal species (1. Elephant 2.Lion 3.Penguin): ");
             String speciesNumber = sc.nextLine();
 
             try {
+                // Using switch to create the right animal species.
                 switch (speciesNumber) {
                     case "1":
                         animalAdded=Zoo.addAnimal(animalID, animalName, weightKg, requiredMealsPerDay, "Elephant");
@@ -141,22 +150,26 @@ public class Main{
                 System.out.println(e.getMessage());
             }
         }
+        // if animal be added successful, pop up a message.
         if (animalAdded) {
             System.out.println("Animal added successfully!");
         }
     }
 
+    // Remove animal from the zoo.
     private static void removeAnimal(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
         //Zoo zoo = new Zoo();
         String animalID = sc.nextLine().trim();
 
+        // If the zoo does have this animal, show the wrong message.
         if (!Zoo.findAnimals(animalID)) {
             System.out.println("This animal does not exist!");
             return;
         }
 
+        //Show the message to tell user if the action successes.
         if(Zoo.removeAnimal(animalID)){
             System.out.println("Animal removed!");
         }
@@ -165,11 +178,14 @@ public class Main{
         }
     }
 
+    // Add the keeper to the zoo.
     private static void addKeeper() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
 
+
+        // If this keeper is in the zoo, show the message and return.
         if (Zoo.findKeepers(keeperID)) {
             System.out.println("This keeper exists!");
             return;
@@ -183,17 +199,20 @@ public class Main{
         }
     }
 
+    //Removing the specific keeper from the zoo.
     private static void removeKeeper() {
         //Zoo zoo = new Zoo();
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
 
+        // If zoo does not have this keeper, show the message and return.
         if (!Zoo.findKeepers(keeperID)) {
             System.out.println("This keeper does not exist!");
             return;
         }
 
+        // Trying to remove keeper.
         if (Zoo.removeKeeper(keeperID)) {
             System.out.println("Keeper removed!");
         }else{
@@ -202,21 +221,26 @@ public class Main{
 
     }
 
+    // Assigning the specific keeper to the specific animal, user will need to enter the keeperID and animalID.
     private static void assignKeeperToAnimal() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine().trim();
+        //Make sure the animal is correct in the zoo.
         if (!Zoo.findAnimals(animalID)) {
             System.out.println("This animal does not exist!");
             return;
         }
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
+
+        //Make sure the keeper is correct and in the zoo.
         if (!Zoo.findKeepers(keeperID)) {
             System.out.println("This keeper does not exist!");
             return;
         }
         try {
+            // Using the method from Zoo class to complete action.
             if(Zoo.assignKeeperToAnimal(animalID, keeperID)){
                 System.out.println("Animal assigned successfully!");
             }else{
@@ -228,24 +252,29 @@ public class Main{
 
     }
 
+    // The method to feed specific animal with two feed ways.
     private static void feedAnimal(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter animal ID: ");
         String animalID = sc.nextLine().trim();
 
+        // Make sure this animal is in the zoo.
         if (Zoo.findAnimals(animalID)) {
             System.out.println("Enter the feed portion (1.Default 2.Custom): ");
             String choice = sc.nextLine().trim();
+            // If the user choose using default portion to feed, using the feedAnimal(default) method to feed it.
             if (choice.equals("1")) {
                 try {
                     Zoo.feedAnimal(animalID);
                 }  catch (OverfeedException e) {
                     System.out.println(e.getMessage());
                 }
+            // If the user choose using custom amount to feed, using the feedAnimal(custom) method to feed it.
             }else if (choice.equals("2")) {
                 double feedPortion = 0;
                 do {
                     try{
+                        // User enter the feed amount.
                         System.out.println("The amount of feed:");
                         feedPortion = sc.nextDouble();
                         sc.nextLine(); // discard the \n
@@ -269,11 +298,13 @@ public class Main{
 
     }
 
+    // Assign expertise to the specific keeper.
     private static void assignExpertise(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter keeper ID: ");
         String keeperID = sc.nextLine().trim();
 
+        // Make sure the keeper is in the zoo.
         if (Zoo.findKeepers(keeperID)) {
             System.out.print("Enter the expertise: ");
             String expertise = sc.nextLine().trim();
@@ -283,6 +314,7 @@ public class Main{
         System.out.println("This keeper does not exist!");
     }
 
+    // Show the summary of zoo.
     private static void zooSummary() {
         Zoo.summary();
     }

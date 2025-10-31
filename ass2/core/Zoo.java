@@ -16,8 +16,9 @@ public class Zoo {
     private static ArrayList<Animal> animals = new ArrayList<>();
     private static ArrayList<Keeper> keepers = new ArrayList<>();
 
-
+    // Assign the specified animal to the specified keeper
     public static boolean assignKeeperToAnimal(String keeperID, String animalID) throws ExpertiseMismatchException {
+        // If
         if (keeperID == null || animalID == null){
             return false;
         }
