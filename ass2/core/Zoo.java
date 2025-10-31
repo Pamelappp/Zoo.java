@@ -18,7 +18,7 @@ public class Zoo {
 
     // Assign the specified animal to the specified keeper
     public static boolean assignKeeperToAnimal(String keeperID, String animalID) throws ExpertiseMismatchException {
-        // If
+        // If keeper
         if (keeperID == null || animalID == null){
             return false;
         }
