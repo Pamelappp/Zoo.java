@@ -271,7 +271,7 @@ public class Main{
                 }
             // If the user choose using custom amount to feed, using the feedAnimal(custom) method to feed it.
             }else if (choice.equals("2")) {
-                double feedPortion = 0;
+                double feedPortion;
                 do {
                     try{
                         // User enter the feed amount.
