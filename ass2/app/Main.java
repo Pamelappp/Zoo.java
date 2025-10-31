@@ -193,8 +193,7 @@ public class Main{
 
         System.out.print("Enter keeper name: ");
         String keeperName = sc.nextLine();
-        Keeper keeper = new Keeper(keeperID, keeperName);
-        if(Zoo.addKeeper(keeper)){
+        if(Zoo.addKeeper(keeperID, keeperName)){
             System.out.println("Keeper added successfully!");
         }
     }
